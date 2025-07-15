@@ -88,7 +88,7 @@ else:
         BMI = st.number_input("Body Mass Index", 10, 60, 25)
         Education = st.selectbox("Education Level (0 = High School, 1 = Higher)", [0, 1])
         Children = st.slider("Number of Children", 0, 5, 1)
-        Pet = st.slider("Number of Pets", 0, 5, 1)
+        Pets = st.slider("Number of Pets", 0, 5, 1)
         submit = st.form_submit_button("Predict")
 
     if submit:
