@@ -38,8 +38,13 @@ st.markdown("""
     margin-bottom: 1.2em;
 }
 </style>
-<div class="header">Absenteeism Prediction App</div>
-<div class="subheader-left">Created by Blessing Ibodje  |  Contact: ibodjeb@gmail.com</div>
+<div class="header">
+    🚀 <strong style="font-size: 32px;">Absenteeism Prediction App</strong>
+</div>
+<div class="subheader-left">
+    <strong>Created by Blessing Ibodje</strong>  |
+    <a href="mailto:ibodjeb@gmail.com" style="color: #66ccff; text-decoration: none;">Contact: ibodjeb@gmail.com</a>
+</div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
