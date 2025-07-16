@@ -38,8 +38,8 @@ st.markdown("""
     margin-bottom: 1.2em;
 }
 </style>
-<div class="header">
-    🚀 <strong style="font-size: 32px;">Absenteeism Prediction App</strong>
+<div class="header" style="background-color:#cc0000; padding:10px; border-radius:8px;">
+    <strong style="font-size: 24px; color: white; text-transform: uppercase;">Absenteeism Prediction App</strong>
 </div>
 <div class="subheader-left">
     <strong>Created by Blessing Ibodje</strong>  |
