@@ -13,17 +13,28 @@ st.set_page_config(page_title="Absenteeism Prediction App", layout="wide")
 # === Custom Header ===
 st.markdown("""
 <style>
+@media (prefers-color-scheme: dark) {
+  .header, .subheader-left {
+    color: #FFFFFF;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .header {
+    color: #2c3e50;
+  }
+  .subheader-left {
+    color: #333333;
+  }
+}
 .header {
     text-align: center;
     font-size: 28px;
     font-weight: bold;
-    color: #2c3e50;
     margin-bottom: 0.2em;
 }
 .subheader-left {
     text-align: left;
     font-size: 14px;
-    color: #333;
     margin-bottom: 1.2em;
 }
 </style>
