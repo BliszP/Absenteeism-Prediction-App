@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import plotly.express as px
-from pathlib import Path
+import os
 
 # Load model and scaler
 model = joblib.load("model.pkl")
@@ -50,13 +49,6 @@ st.markdown("""
 - **Reason_4** — Routine Medical Check-Ups
 """)
 
-# === Display image from PDF ===
-img_path = Path("tableau_dashboard_image.png")
-if img_path.exists():
-    st.image(str(img_path), use_column_width=True, caption="Extracted Tableau Visualization")
-else:
-    st.warning("📌 Dashboard image not found. Please add 'tableau_dashboard_image.png' to your project folder.")
-
 # Feature columns
 feature_order = ['Reason_1', 'Reason_2', 'Reason_3', 'Reason_4', 'Month_Values',
                  'Transportation Expense', 'Age', 'Body Mass Index',
@@ -80,8 +72,9 @@ def preprocess_uploaded_data(df):
                   'Pets', 'Absenteeism Time in Hours', 'Reason_1', 'Reason_2', 'Reason_3', 'Reason_4']
     df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
     df['Month_Values'] = df['Date'].dt.month
-    df = df.drop(['Date', 'Day of the Week', 'Daily Work Load Average', 'Distance to Work', 'Absenteeism Time in Hours'], axis=1)
+    df = df.drop(['Date', 'Absenteeism Time in Hours', 'Distance to Work', 'Daily Work Load Average'], axis=1)
     df['Education'] = df['Education'].map({1: 0, 2: 1, 3: 1, 4: 1})
+    df = df.fillna(0)
     df = df[feature_order]
     return df, df_with_predictions
 
@@ -127,23 +120,23 @@ if data is not None:
     st.dataframe(df_with_predictions)
     st.download_button("📥 Download Predictions as CSV", df_with_predictions.to_csv(index=False), file_name="predictions.csv")
 
-    # Interactive Charts
-    st.subheader("📈 Interactive Dashboard")
-    col1, col2 = st.columns(2)
+    # Visual Insights Section Moved Below Prediction Output
+    st.subheader("📊 Visual Insights from Analysis")
+    image_paths = [
+        "Age vs Probability.png",
+        "Reasons vs Probability.png",
+        "Transportation Expenses & Children.png"
+    ]
+    image_captions = [
+        "Age vs Absence Probability",
+        "Reasons vs Absence Probability",
+        "Transportation Expenses & Children"
+    ]
+    for path, caption in zip(image_paths, image_captions):
+        if os.path.exists(path):
+            st.image(path, caption=caption, use_container_width=True)
+        else:
+            st.warning(f"⚠️ {caption} image not found. Please upload '{path}' to the app folder.")
 
-    with col1:
-        feature = st.selectbox("Feature vs Age", feature_order, key="plot1")
-        fig1 = px.scatter(df_with_predictions, x="Age", y=feature, color="Prediction")
-        st.plotly_chart(fig1, use_container_width=True)
-
-    with col2:
-        reason = st.selectbox("Reason Column", ['Reason_1', 'Reason_2', 'Reason_3', 'Reason_4'], key="plot2")
-        fig2 = px.bar(df_with_predictions, x=reason, y="Probability", color="Prediction")
-        st.plotly_chart(fig2, use_container_width=True)
-
-    st.subheader("🚗 Transportation vs Probability")
-    fig3 = px.scatter(df_with_predictions, x="Transportation Expense", y="Probability",
-                      size="Children", color="Prediction")
-    st.plotly_chart(fig3, use_container_width=True)
 else:
     st.info("Upload a CSV file or open manual input to get started.")
