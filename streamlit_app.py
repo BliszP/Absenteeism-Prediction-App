@@ -38,7 +38,7 @@ st.markdown("""
     margin-bottom: 1.2em;
 }
 </style>
-<div class="header" style="background-color:#cc0000; padding:10px; border-radius:8px;">
+<div class="header" style="background-color:#001f3f;"  // Glossy navy bl padding:10px; border-radius:8px;">
     <strong style="font-size: 24px; color: white; text-transform: uppercase;">Absenteeism Prediction App</strong>
 </div>
 <div class="subheader-left">
