@@ -13,6 +13,14 @@ st.set_page_config(page_title="Absenteeism Prediction App", layout="wide")
 # === Custom Header ===
 st.markdown("""
 <style>
+body {
+    background-color: #f4f6f8;
+}
+main .block-container {
+    background-color: #f4f6f8 !important;
+    padding-top: 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
   .header, .subheader-left {
     color: #FFFFFF;
@@ -40,8 +48,8 @@ st.markdown("""
 body {
     background-color: #f4f6f8;
 }
-</st
-<div class="header" style="background-color:#001f3f;"  // Glossy navy blue look
+</style>
+<div class="header" style="background-color:#001f3f !impo"  // Glossy navy blue look
     }
   ]
 } padding:10px; border-radius:8px;">
